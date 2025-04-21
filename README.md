@@ -1,1 +1,4 @@
-# Platform-Cho
+Platform Cho
+
+Косов Руслан - RusimusPrime
+Ушаков Федор - BilDecypher
