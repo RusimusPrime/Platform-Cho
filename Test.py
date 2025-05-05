@@ -4,8 +4,6 @@ import os
 from PyPDF2 import PdfReader
 import sqlite3
 from striprtf.striprtf import rtf_to_text
-import pypandoc
-
 app = Flask(__name__)
 
 UPLOAD_FOLDER = os.path.dirname(os.path.abspath(__file__))
