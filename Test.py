@@ -1,5 +1,4 @@
-from flask import Flask, request, render_template_string, render_template_string, send_file
-
+from flask import Flask, request, render_template_string
 
 import os
 from PyPDF2 import PdfReader
@@ -58,14 +57,12 @@ def show_file(id):
     return render_template_string(html_text)
 
 
-
-
 def action(name):
     reader = PdfReader(name)
     page = reader.pages
-    print([elem.extract_text() for elem in page])
     with open(f"books/{name[:name.find(".pdf")] + ".rtf"}", 'w') as file:
-        file.write("\n".join(["\t" + elem.replace("\n", "") for elem in "".join([elem.extract_text() for elem in page]).split(". \n")]))
+        file.write("\n".join(
+            ["\t" + elem.replace("\n", "") for elem in "".join([elem.extract_text() for elem in page]).split(". \n")]))
 
     connection = sqlite3.connect('cho.db')
     cur = connection.cursor()
