@@ -63,16 +63,9 @@ def show_file(id):
 def action(name):
     reader = PdfReader(name)
     page = reader.pages
+    print([elem.extract_text() for elem in page])
     with open(f"books/{name[:name.find(".pdf")] + ".rtf"}", 'w') as file:
-        for elem in page:
-            file.write(elem.extract_text())
-
-    with open(f"books/{name[:name.find(".pdf")] + ".rtf"}", "r") as f:
-        red = f.readlines()
-        spisok = ["\t" + elem.replace("\n", "") for elem in "".join(red).split(". \n")]
-
-    with open(f"books/{name[:name.find(".pdf")] + ".rtf"}", 'w') as file:
-        file.write("\n".join(spisok))
+        file.write("\n".join(["\t" + elem.replace("\n", "") for elem in "".join([elem.extract_text() for elem in page]).split(". \n")]))
 
     connection = sqlite3.connect('cho.db')
     cur = connection.cursor()
