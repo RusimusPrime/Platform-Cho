@@ -57,6 +57,15 @@ def show_file(id):
     return render_template_string(html_text)
 
 
+@app.route('/books')
+def books():
+    con = sqlite3.connect("cho.db")
+    cur = con.cursor()
+    result = cur.execute("""SELECT id, name FROM bible""").fetchall()
+    print(result)
+    return result
+
+
 def action(name):
     reader = PdfReader(name)
     page = reader.pages
