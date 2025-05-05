@@ -67,6 +67,13 @@ def action(name):
         for elem in page:
             file.write(elem.extract_text())
 
+    with open(f"books/{name[:name.find(".pdf")] + ".rtf"}", "r") as f:
+        red = f.readlines()
+        spisok = ["\t" + elem.replace("\n", "") for elem in "".join(red).split(". \n")]
+
+    with open(f"books/{name[:name.find(".pdf")] + ".rtf"}", 'w') as file:
+        file.write("\n".join(spisok))
+
     connection = sqlite3.connect('cho.db')
     cur = connection.cursor()
     result = cur.execute("""SELECT * FROM bible""").fetchall()
