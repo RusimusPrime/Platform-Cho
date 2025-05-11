@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{ 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: black;
+    font-size: 16px;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    max-width: 100%;
+}
+
+.wrepper {
+    background: white;
+    width: 100%;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+header {
+    padding: 20px 0;
+}
+
+h3 {
+    width: 80%;
+    margin: 20px 10%;
+    font-size: 25px;
+}
+
+
+header .logo {
+    text-transform: uppercase;
+    display: flex;
+    font-size: 54px;
+    font-weight: 1200;
+    margin-top: -15px;
+}
+
+header nav {
+    float: right;
+    width: 50%;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: -45px;
+}
+
+header nav ul li{
+    display: inline-block;
+    bottom: 0;
+
+}
+
+header nav ul li a{
+    color: black;
+}
+
+
+header nav ul li:not(.active):not(.btn) a:hover{
+    border-block: 5px solid black;
+    transition: all 100ms ease;
+}
+
+.recommendation{
+    margin: 0 10%;
+    width: 60%;
+}
+
+.recommendation .article{
+    list-style: none;
+    position: relative;
+    display: flex;
+    padding: 1% 5%;
+    border: 3mm ridge black;
+}
+
+
+.recommendation .article li {
+    display: inline-block;
+    position: absolute;
+    left: 57%;
+}
+.recommendation .article span {
+    display: inline-block;
+    position: absolute;
+    font-size: 12px;
+    left: 12%;
+    top: 21%;
+}
+
+.recommendation .article .heart{
+    width: 20px;
+    height: auto;
+}
+ .block{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+ }
+
+ .block .write{
+    white-space: nowrap;
+    font-size: 20px;
+    height: 20px;
+    width: auto;
+    color: rgb(255, 255, 255);
+    transform: scale(0.8);
+    float: right;
+    background: rgb(83, 83, 83);
+    padding: 10px 50px;
+    margin: 0 7%;
+    border-radius: 6px;
+    display: block;
+    transition: all 500ms ease;
+ }
+
+ .block .write:hover{
+    background: rgb(31, 31, 31);
+    transform: scale(0.83);
+ }

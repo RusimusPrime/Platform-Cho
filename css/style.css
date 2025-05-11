@@ -21,7 +21,7 @@ img{
 }
 
 .wrepper {
-    background: white;
+    background: linear-gradient(to bottom,rgba(255, 255, 255, 1) 0%, rgba(176, 176, 176, 1) 60%, rgba(0, 0, 0, 1) 100%);;
     width: 100%;
 }
 
@@ -78,6 +78,7 @@ header nav ul li.btn a{
 
 header nav ul li.btn a:hover{
     background: rgb(59, 59, 59);
+    border-radius: 9px;
 }
 
 
@@ -98,9 +99,17 @@ header nav ul li.btn a:hover{
 }
 .tems .see-all:hover{
     background: rgb(59, 59, 59);
-    transform: scale(0.68);
+    transform: scale(0.63);
 }
-
+.tems .topic .block{
+    background: white;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+.tems .topic .block:hover{
+    background: rgba(255, 255, 255, 0.63);
+    transform:scale(0.96)
+}
 .tems .topic{
     display: flex;
     justify-content: space-between;

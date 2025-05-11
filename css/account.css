@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh; /* Высота окна браузера */
+    margin: 0; /* Убираем отступы */
+    background-color: #f0f0f0; /* Цвет фона */
+    display: flex; /* Используем флекс для вертикального центрирования */
+    flex-direction: column; /* Располагаем элементы по вертикали */
+    justify-content: center; /* Центруем по вертикали */
+    align-items: center; /* Центруем по горизонтали */
+}
+.window{
+    border: 2mm solid black;
+    margin-top: -9vh;
+    padding: 14px;
+    align-items: center; /* Центруем по горизонтали */
+}
+
+p{
+    text-align: center;
+}
+
+.logo {
+    font-size: 78px;
+    font-family: Arial, sans-serif;
+}
+
+.btn{
+    font-size: 20px;
+    margin-top: 1vh;
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background: rgb(83, 83, 83);
+    padding: 10px 50px;
+    border-radius: 6px;
+    display: block;
+    transition: all 500ms ease;
+}
+.btn:hover{
+    background: rgb(46, 46, 46);
+    transform: scale(1.03);
+}
+
+input[type="text_userName"]{
+    margin-top: 2vh;
+    height: 19px;
+    border: 1mm solid rgb(68, 68, 68);
+}
+
+input[type="text_password"]{
+    margin: 1vh;
+    height: 19px;
+    border: 1mm solid rgb(68, 68, 68);
+}
