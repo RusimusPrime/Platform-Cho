@@ -65,8 +65,8 @@ header nav ul li a{
 
 
 header nav ul li:not(.active):not(.btn) a:hover{
-    border-block: 5px solid black;
-    transition: all 100ms ease;
+    border-bottom: 2px solid black;
+    transition: all 40ms ease;
 }
 
 header nav ul li.btn a{

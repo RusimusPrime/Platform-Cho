@@ -10,6 +10,7 @@ body{
     font-weight: 400;
     color: black;
     font-size: 16px;
+    background-color: rgb(243, 243, 243);
 }
 
 a{
@@ -21,7 +22,7 @@ img{
 }
 
 .wrepper {
-    background: white;
+    background: rgb(243, 243, 243);
     width: 100%;
 }
 
@@ -75,8 +76,8 @@ header nav ul li a{
 
 
 header nav ul li:not(.active):not(.btn) a:hover{
-    border-block: 5px solid black;
-    transition: all 100ms ease;
+    border-bottom: 2px solid black;
+    transition: all 20ms ease;
 }
 
 .recommendation{
@@ -110,19 +111,19 @@ header nav ul li:not(.active):not(.btn) a:hover{
     width: 20px;
     height: auto;
 }
- .block{
+.block{
     list-style: none;
     display: flex;
     justify-content: space-between;
     position: relative;
  }
 
- .block .write{
+.block .write{
     white-space: nowrap;
     font-size: 20px;
     height: 20px;
     width: auto;
-    color: rgb(255, 255, 255);
+    color: rgb(219, 219, 219);
     transform: scale(0.8);
     float: right;
     background: rgb(83, 83, 83);
@@ -133,7 +134,74 @@ header nav ul li:not(.active):not(.btn) a:hover{
     transition: all 500ms ease;
  }
 
- .block .write:hover{
+.block .write:hover{
     background: rgb(31, 31, 31);
     transform: scale(0.83);
+ }
+
+.info .writing{
+    background-color: rgb(233, 233, 233);
+    border: 1mm solid rgb(197, 197, 197);
+    color: rgb(70, 70, 70);
+    padding: 30px;
+    border-radius: 3mm;
+    text-align: center;
+    min-width: 30%;
+ }
+
+.info .writing h1{
+    font-size: 29px;
+    font-weight: 600;
+    margin: 2px;
+}
+.info .writing span{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.info .writing p{
+    font-size: 15px;
+    margin-top: 20px;
+    font-weight: 420;
+}
+
+.info .writing li a{
+    font-size: 15px;
+    margin-top: 20px;
+    font-weight: 420;
+    white-space: nowrap;
+    color: rgb(233, 233, 233);
+    background: rgb(83, 83, 83);
+    padding: 15px;
+    border-radius: 9px;
+    display: block;
+    transition: all 400ms ease;
+}
+
+.info .writing li a:hover{
+    transform: scale(0.96);
+ }
+
+ .info .writing li a:active{
+    transition: all 100ms ease;
+    transform: scale(0.92);
+ }
+
+
+ .info .reviews{
+    color: rgb(70, 70, 70);
+    background-color: rgb(233, 233, 233);
+    border: 1mm solid rgb(197, 197, 197);
+    padding: 30px;
+    width: 30%;
+    border-radius: 3mm;
+    text-align: center;
+ }
+
+.info{
+    margin: 60px 10%;
+    display: inline-block;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
  }
