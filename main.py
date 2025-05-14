@@ -8,6 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import logout_user, LoginManager
 from flask_login import login_user
 from flask_login import UserMixin
+from datetime import datetime
+from flask_login import current_user
 
 app = Flask(__name__)
 
@@ -28,7 +30,8 @@ class Bible(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     path = db.Column(db.String, nullable=False)
-
+    id_user = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 class Users(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -58,7 +61,18 @@ def upload_pdf():
 
         save_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(save_path)
+
+        new_book = Bible(
+            name=file.filename,
+            path=save_path,
+            id_user=current_user.id,
+            date=datetime.utcnow()
+        )
+        db.session.add(new_book)
+        db.session.commit()
+        print(current_user.id)
         action(file.filename)
+
         os.remove(save_path)
         return f"Файл {file.filename} успешно сохранён в папку приложения"
 
@@ -169,10 +183,6 @@ def action(name):
     with open(rtf_path, 'w', encoding='utf-8') as file:
         file.write(rtf_text)
 
-    max_id = db.session.query(db.func.max(Bible.id)).scalar() or 0
-    new_entry = Bible(id=max_id + 1, name=name, path=rtf_path)
-    db.session.add(new_entry)
-    db.session.commit()
 
 
 if __name__ == "__main__":
