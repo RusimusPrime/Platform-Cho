@@ -8,7 +8,6 @@ from striprtf.striprtf import rtf_to_text
 app = Flask(__name__)
 
 UPLOAD_FOLDER = os.path.dirname(os.path.abspath(__file__))
-AUTHORIZED = False
 
 
 @app.route("/load", methods=["GET", "POST"])
@@ -80,13 +79,24 @@ def register():
         return redirect("/home", code=302)
     return render_template('register_window.html')
 
+
 @app.route('/home')
 def home():
     return render_template('index.html')
 
+
+@app.route('/rec')
+def rec():
+    return render_template('recomindation.html')
+
+
+@app.route('/')
+def base():
+    return redirect("/home", code=302)
+
+
 @app.route('/singing', methods=['GET', 'POST'])
 def singing():
-    global AUTHORIZED
     if request.method == 'POST':
         try:
             connection = sqlite3.connect('cho.db')
@@ -101,7 +111,6 @@ def singing():
             return "Ничего не нашлось"
         else:
             if result == request.form.get('userName'):
-                AUTHORIZED = True
                 return redirect("/home", code=302)
             else:
                 return "неправиьный логин"
