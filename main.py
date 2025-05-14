@@ -74,18 +74,9 @@ def upload_pdf():
         action(file.filename)
 
         os.remove(save_path)
-        return f"Файл {file.filename} успешно сохранён в папку приложения"
+        return redirect("/home", code=302)
 
-    return render_template_string("""
-        <html>
-            <body>
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="file" name="pdf_file" accept="application/pdf" required>
-                    <button type="submit">Загрузить PDF</button>
-                </form>
-            </body>
-        </html>
-    """)
+    return render_template("download.html")
 
 
 @app.route('/watch/<int:id>')
