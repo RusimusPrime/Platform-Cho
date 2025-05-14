@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string, render_template, redirect, session, url_for
+from flask import Flask, request, render_template_string, render_template, redirect, url_for
 import hashlib
 import os
 from PyPDF2 import PdfReader
