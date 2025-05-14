@@ -31,9 +31,65 @@ img{
     margin: 0 auto;
 }
 
+.block a{
+    text-decoration: none;
+    color: rgb(97, 97, 97);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.out_in {
+    text-align: center;
+    z-index: 1;
+    display: none; /* Используем флекс для вертикального центрирования */
+    flex-direction: column; /* Располагаем элементы по вертикали */
+    justify-content: center; /* Центруем по вертикали */
+    align-items: center; /* Центруем по горизонтали */
+}
+
+.logout-btn{
+  color: black;
+  background-color: rgb(243, 243, 243);
+  padding: 10px 15px;
+  text-decoration: none;
+}
+.login-btn{
+    background-color: rgb(243, 243, 243);
+    margin: -4px;
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+  }
+
+.account{
+    cursor: pointer;
+    display: inline-block;
+}
+
+.account:hover ~ .out_in {
+    display: none;
+}
+
+.block a:hover{
+    color: rgb(82, 70, 70);
+}
+
+.block a:active{
+    color: rgb(163, 140, 140);
+}
+
 
 header {
     padding: 20px 0;
+    border-bottom: 0.5mm solid rgb(128, 128, 128);
+}
+
+.types{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 60px 0;
 }
 
 h3 {
@@ -48,7 +104,7 @@ header .logo {
     display: flex;
     font-size: 54px;
     font-weight: 1200;
-    margin-top: -15px;
+    margin-top: -6px;
 }
 
 header nav {
@@ -56,12 +112,12 @@ header nav {
     width: 50%;
 }
 
-header nav ul {
+header nav ul:not(.out_in){
     list-style: none;
     display: flex;
     justify-content: space-between;
     position: relative;
-    margin-top: -45px;
+    margin-top: -40px;
 }
 
 header nav ul li{
@@ -81,8 +137,8 @@ header nav ul li:not(.active):not(.btn) a:hover{
 }
 
 .recommendation{
-    margin: 0 10%;
-    width: 60%;
+    margin: -5px 10%;
+    width: 40%;
 }
 
 .recommendation .article{
@@ -90,7 +146,7 @@ header nav ul li:not(.active):not(.btn) a:hover{
     position: relative;
     display: flex;
     padding: 1% 5%;
-    border: 3mm ridge black;
+    margin: 10px;
 }
 
 
@@ -118,23 +174,26 @@ header nav ul li:not(.active):not(.btn) a:hover{
     position: relative;
  }
 
-.block .write{
+.write{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: -12px;
     white-space: nowrap;
     font-size: 20px;
     height: 20px;
     width: auto;
     color: rgb(219, 219, 219);
     transform: scale(0.8);
-    float: right;
     background: rgb(83, 83, 83);
-    padding: 10px 50px;
-    margin: 0 7%;
+    padding: 10px 10px;
     border-radius: 6px;
     display: block;
     transition: all 500ms ease;
  }
 
-.block .write:hover{
+.write:hover{
     background: rgb(31, 31, 31);
     transform: scale(0.83);
  }

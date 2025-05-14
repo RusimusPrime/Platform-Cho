@@ -15,12 +15,21 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">My articles</a></li>
-                    <li><a href="#">Account</a></li>
+                    <li><a href="#" class="account">Account</a></li>
+                    <a href="#" class="write">write your article</a>
                 </ul>
+                <div class="out_in">
+                    <a href="#" class="logout-btn">Выйти</a>
+                    <a href="#" class="login-btn">Войти</a>
+                </div>
             </nav>
+            
         </header>
         <div class="base">
-            <h3>Popular</h3>
+            <div class="types">
+                <h3>Popular</h3>
+                <h3>New</h3>
+            </div>
             <div class="block">
                 <div class="recommendation">
                     <div class="article">
@@ -28,25 +37,70 @@
                         <span class="text1">кол-во сердец</span>
                         <li class="text2"><a href="#">название</a></li>
                     </div>
+                    <hr>
                     <div class="article">
                         <img src="img/heart.svg" alt="" class="heart">
                         <span class="text1">кол-во сердец</span>
                         <li class="text2"><a href="#">название</a></li>
                     </div>
+                    <hr>
                     <div class="article">
                         <img src="img/heart.svg" alt="" class="heart">
                         <span class="text1">кол-во сердец</span>
                         <li class="text2"><a href="#">название</a></li>
                     </div>
+                    <hr>
                     <div class="article">
                         <img src="img/heart.svg" alt="" class="heart">
                         <span class="text1">кол-во сердец</span>
                         <li class="text2"><a href="#">название</a></li>
                     </div>
                 </div>
-                <a href="#" class="write">write your article</a>
+                <hr>
+                <div class="recommendation">
+                    <div class="article">
+                        <img src="img/heart.svg" alt="" class="heart">
+                        <span class="text1">кол-во сердец</span>
+                        <li class="text2"><a href="#">название</a></li>
+                    </div>
+                    <hr>
+                    <div class="article">
+                        <img src="img/heart.svg" alt="" class="heart">
+                        <span class="text1">кол-во сердец</span>
+                        <li class="text2"><a href="#">название</a></li>
+                    </div>
+                    <hr>
+                    <div class="article">
+                        <img src="img/heart.svg" alt="" class="heart">
+                        <span class="text1">кол-во сердец</span>
+                        <li class="text2"><a href="#">название</a></li>
+                    </div>
+                    <hr>
+                    <div class="article">
+                        <img src="img/heart.svg" alt="" class="heart">
+                        <span class="text1">кол-во сердец</span>
+                        <li class="text2"><a href="#">название</a></li>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        let hideTimeout;
+    
+        document.querySelector('.account').addEventListener('mouseover', function() {
+            clearTimeout(hideTimeout); // Отменяем таймер, если курсор наводится снова
+            document.querySelector('.out_in').style.display = 'flex';
+        });
+    
+        document.querySelector('.account').addEventListener('mouseout', function() {
+            let outInElement = document.querySelector('.out_in');
+    
+            // Установим таймер на 3 секунды перед скрытием
+            hideTimeout = setTimeout(function() {
+                outInElement.style.display = 'none'; // Или 'block' в зависимости от ваших требований
+            }, 1700);
+        });
+    </script>
 </body>
 </html>
