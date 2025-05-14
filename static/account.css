@@ -33,6 +33,7 @@ p{
 .btn{
     font-size: 20px;
     margin-top: 1vh;
+    margin-bottom: 10px;
     font-family: Arial, sans-serif;
     white-space: nowrap;
     font-size: 20px;
@@ -41,8 +42,25 @@ p{
     padding: 10px 50px;
     border-radius: 6px;
     display: block;
+    text-decoration: none;
     transition: all 500ms ease;
 }
+
+.btn2{
+    text-decoration: none;
+    color: rgb(131, 99, 99);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.btn2:hover{
+    color: rgb(82, 70, 70);
+}
+
+.btn2:active{
+    color: rgb(163, 140, 140);
+}
+
 .btn:hover{
     background: rgb(46, 46, 46);
     transform: scale(1.03);

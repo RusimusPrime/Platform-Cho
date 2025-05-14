@@ -100,18 +100,16 @@ def books():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        login = request.form.get('userName')
-        password = request.form.get('password')
-        if not login or not password:
+        if not request.form.get('userName') or not request.form.get('password'):
             return "Заполните все поля", 400
 
-        existing_user = Users.query.filter_by(login=login).first()
+        existing_user = Users.query.filter_by(login=request.form.get('userName')).first()
         if existing_user:
             return "Пользователь с таким логином уже существует", 400
 
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        hashed_password = hashlib.sha256(request.form.get('password').encode()).hexdigest()
         max_id = db.session.query(db.func.max(Users.id)).scalar() or 0
-        new_user = Users(id=max_id + 1, login=login, password=hashed_password)
+        new_user = Users(id=max_id + 1, login=request.form.get('userName'), password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
         return redirect("/home", code=302)
@@ -137,13 +135,11 @@ def base():
 @app.route('/singing', methods=['GET', 'POST'])
 def singing():
     if request.method == 'POST':
-        login_input = request.form.get('userName')
-        password_input = request.form.get('password')
-        if not login_input or not password_input:
+        if not request.form.get('userName') or not request.form.get('password'):
             return "Заполните все поля", 400
 
-        hashed_password = hashlib.sha256(password_input.encode()).hexdigest()
-        user = Users.query.filter_by(login=login_input, password=hashed_password).first()
+        hashed_password = hashlib.sha256(request.form.get('password').encode()).hexdigest()
+        user = Users.query.filter_by(login=request.form.get('userName'), password=hashed_password).first()
         if user:
             login_user(user)
             return redirect(url_for('home'))
