@@ -86,7 +86,7 @@ header nav ul li.btn a:hover{
 
 .tems {
     width: 80%;
-    padding-top: 30px; 
+    padding-top: 30px;
 }
 
 .tems .see-all{
@@ -107,8 +107,9 @@ header nav ul li.btn a:hover{
 .topic {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-   justify-content: center;
+    justify-content: center;
     gap: 10px;
+    padding-top: 30px;
 }
 
 .block {
