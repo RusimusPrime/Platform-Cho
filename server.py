@@ -178,11 +178,12 @@ def action(name):
     reader = PdfReader(name)
     pages = reader.pages
     text_content = "".join([page.extract_text() for page in pages if page.extract_text()])
-
-    rtf_text = "\n".join(
-        ["\t" + elem.replace("\n", "") for elem in text_content.split(". \n")]
-    )
-
+    if "\n" in text_content:
+        rtf_text = "\n".join(
+            ["\t" + elem.replace("\n", "") for elem in text_content.split(". \n")]
+        )
+    else:
+        rtf_text = text_content
     rtf_path = f"books/{name[:name.find('.pdf')]}.rtf"
     os.makedirs('books', exist_ok=True)
     with open(rtf_path, 'w', encoding='utf-8') as file:
