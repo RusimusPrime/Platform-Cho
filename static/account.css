@@ -6,19 +6,19 @@
 }
 
 body {
-    height: 100vh; /* Высота окна браузера */
-    margin: 0; /* Убираем отступы */
-    background-color: #f0f0f0; /* Цвет фона */
-    display: flex; /* Используем флекс для вертикального центрирования */
-    flex-direction: column; /* Располагаем элементы по вертикали */
-    justify-content: center; /* Центруем по вертикали */
-    align-items: center; /* Центруем по горизонтали */
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .window{
     border: 2mm solid black;
     margin-top: -9vh;
     padding: 14px;
-    align-items: center; /* Центруем по горизонтали */
+    align-items: center;
 }
 
 p{
