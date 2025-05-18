@@ -2,16 +2,15 @@ from flask_login import login_required, logout_user, LoginManager, login_user, U
 from flask import Flask, request, render_template_string, render_template, redirect, url_for
 from striprtf.striprtf import rtf_to_text
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
 from datetime import datetime
 from PyPDF2 import PdfReader
 from openai import OpenAI
+import requests
 import hashlib
 import sqlite3
 import json
 import os
 
-load_dotenv()
 api_key = os.getenv("API_KEY")
 app = Flask(__name__)
 
@@ -80,13 +79,15 @@ def upload_pdf():
         req = client.images.generate(**params)
 
         image_url = json.loads(req.model_dump_json())['data'][0]['url']
-
+        r = requests.get(image_url)
+        with open(f"static/covers/{file.filename[:file.filename.find('.pdf')]}.jpg", "wb") as f:
+            f.write(r.content)
         new_book = Bible(
             name=file.filename[:file.filename.index(".pdf")],
             path=f"books/{file.filename[:file.filename.find('.pdf')]}.rtf",
             id_user=current_user.id,
             date=datetime.utcnow(),
-            path_to_cover=image_url
+            path_to_cover=f"static/covers/{file.filename[:file.filename.find('.pdf')]}.jpg"
         )
         db.session.add(new_book)
         db.session.commit()
@@ -107,12 +108,8 @@ def show_file(id):
     print(result)
     with open(result, 'r', encoding='utf-8') as f:
         rtf_content = f.read()
-    text = rtf_to_text(rtf_content)
-
-    html_text = text.replace('\n\n', '</p><p>').replace('\n', '<br>')
-    html_text = f'<p>{html_text}</p>'
-
-    return render_template_string(html_text)
+    print(rtf_content)
+    return render_template("book.html", text=rtf_content)
 
 
 @app.route('/books')
@@ -168,7 +165,7 @@ def singing():
             return redirect(url_for('home'))
         else:
             return "Неверный логин или пароль", 401
-    return render_template('singing in account.html')
+    return render_template('singing_in_account.html')
 
 
 @app.route('/logout')
