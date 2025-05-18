@@ -11,6 +11,8 @@ from flask_login import UserMixin
 from datetime import datetime
 from flask_login import current_user
 import sqlite3
+from openai import OpenAI
+import json
 
 app = Flask(__name__)
 
@@ -33,6 +35,7 @@ class Bible(db.Model):
     path = db.Column(db.String, nullable=False)
     id_user = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    path_to_cover = db.Column(db.String, nullable=True)
 
 
 class Users(db.Model, UserMixin):
@@ -64,15 +67,29 @@ def upload_pdf():
         save_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(save_path)
 
+        client = OpenAI(
+            base_url='https://bothub.chat/api/v2/openai/v1'
+        )
+        params = {
+            'model': 'dall-e-3',
+            'prompt': 'The Horror of the Heights Author Arthur Conan Doyle',
+            'n': 1,
+            'size': '1024x1024',
+        }
+
+        req = client.images.generate(**params)
+
+        image_url = json.loads(req.model_dump_json())['data'][0]['url']
+
         new_book = Bible(
             name=file.filename[:file.filename.index(".pdf")],
             path=save_path,
             id_user=current_user.id,
-            date=datetime.utcnow()
+            date=datetime.utcnow(),
+            path_to_cover=image_url
         )
         db.session.add(new_book)
         db.session.commit()
-        print(current_user.id)
         action(file.filename)
 
         os.remove(save_path)
@@ -125,16 +142,17 @@ def register():
 
 @app.route('/home')
 def home():
+    con = sqlite3.connect("instance/cho.db")
+    cur = con.cursor()
+    result = list(map(lambda x: [f"/watch/{x[0]}", x[1]], cur.execute("""SELECT id, name FROM bible""").fetchall()))
     return render_template('index.html')
 
 
 @app.route('/rec')
 @login_required
 def rec():
-    con = sqlite3.connect("instance/cho.db")
-    cur = con.cursor()
-    result = list(map(lambda x: [f"/watch/{x[0]}", x[1]], cur.execute("""SELECT id, name FROM bible""").fetchall()))
-    return render_template('recomindation.html', elements=result)
+
+    return render_template('recomindation.html')
 
 
 @app.route('/')
