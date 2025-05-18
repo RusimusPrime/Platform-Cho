@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cho</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <div class="wrepper">
+        <header class="container">
+            <sspan class="logo">Cho</sspan>
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/rec">Recommendations</a></li>
+                    <li><a href="/singing">Account</a></li>
+                    <li class="btn"><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="container tems">
+            <a href="#" class="see-all">SEE ALL</a>
+            <h3>Topics</h3>
+            <div class="topic">
+            {% for i in elements%}
+                    <div class="block">
+                        <a href="{{ i[0] }}"><img src="static/kiwi.svg" alt=""></a>
+                        <span>{{ i[1] }}</span>
+                    </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>  
+</body>
+</html>
