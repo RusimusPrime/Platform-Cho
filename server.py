@@ -1,19 +1,18 @@
+from flask_login import login_required, logout_user, LoginManager, login_user, UserMixin, current_user
 from flask import Flask, request, render_template_string, render_template, redirect, url_for
-import hashlib
-import os
-from PyPDF2 import PdfReader
-from flask_login import login_required
 from striprtf.striprtf import rtf_to_text
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import logout_user, LoginManager
-from flask_login import login_user
-from flask_login import UserMixin
+from dotenv import load_dotenv
 from datetime import datetime
-from flask_login import current_user
-import sqlite3
+from PyPDF2 import PdfReader
 from openai import OpenAI
+import hashlib
+import sqlite3
 import json
+import os
 
+load_dotenv()
+api_key = os.getenv("API_KEY")
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cho.db'
@@ -68,11 +67,12 @@ def upload_pdf():
         file.save(save_path)
 
         client = OpenAI(
+            api_key=api_key,
             base_url='https://bothub.chat/api/v2/openai/v1'
         )
         params = {
             'model': 'dall-e-3',
-            'prompt': 'The Horror of the Heights Author Arthur Conan Doyle',
+            'prompt': file.filename[:file.filename.index(".pdf")],
             'n': 1,
             'size': '1024x1024',
         }
@@ -83,7 +83,7 @@ def upload_pdf():
 
         new_book = Bible(
             name=file.filename[:file.filename.index(".pdf")],
-            path=save_path,
+            path=f"books/{file.filename[:file.filename.find('.pdf')]}.rtf",
             id_user=current_user.id,
             date=datetime.utcnow(),
             path_to_cover=image_url
@@ -101,10 +101,11 @@ def upload_pdf():
 @app.route('/watch/<int:id>')
 @login_required
 def show_file(id):
-    bible_entry = Bible.query.get(id)
-    if not bible_entry:
-        return "Запись не найдена", 404
-    with open(bible_entry.path, 'r', encoding='utf-8') as f:
+    con = sqlite3.connect("instance/cho.db")
+    cur = con.cursor()
+    result = cur.execute("""SELECT path FROM bible WHERE id=?""", (id,)).fetchall()[0][0]
+    print(result)
+    with open(result, 'r', encoding='utf-8') as f:
         rtf_content = f.read()
     text = rtf_to_text(rtf_content)
 
@@ -144,14 +145,14 @@ def register():
 def home():
     con = sqlite3.connect("instance/cho.db")
     cur = con.cursor()
-    result = list(map(lambda x: [f"/watch/{x[0]}", x[1]], cur.execute("""SELECT id, name FROM bible""").fetchall()))
-    return render_template('index.html')
+    result = list(map(lambda x: [f"/watch/{x[0]}", x[1], x[2]],
+                      cur.execute("""SELECT id, name, path_to_cover FROM bible""").fetchall()))
+    return render_template('index.html', elements=result)
 
 
 @app.route('/rec')
 @login_required
 def rec():
-
     return render_template('recomindation.html')
 
 

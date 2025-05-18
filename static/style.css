@@ -9,6 +9,7 @@ body{
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     color: black;
+    background: rgb(243, 243, 243);
     font-size: 16px;
 }
 
@@ -18,6 +19,7 @@ a{
 
 img{
     max-width: 100%;
+    height: auto;
 }
 
 .wrepper {
@@ -101,21 +103,26 @@ header nav ul li.btn a:hover{
     background: rgb(59, 59, 59);
     transform: scale(0.63);
 }
-.tems .topic .block{
-    background: white;
-    margin-right: 20px;
+
+.topic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+   justify-content: center;
+    gap: 10px;
+}
+
+.block {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
     border-radius: 8px;
 }
-.tems .topic .block:hover{
+
+.block:hover{
     background: rgba(255, 255, 255, 0.63);
     transform:scale(0.96)
 }
-.tems .topic{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 50px 0;
-}
+
 
 .tems .topic span{
     display: block;

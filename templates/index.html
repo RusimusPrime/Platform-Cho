@@ -24,58 +24,12 @@
             <a href="#" class="see-all">SEE ALL</a>
             <h3>Topics</h3>
             <div class="topic">
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-            </div>
-            <div class="topic">
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-            </div>
-            <div class="topic">
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
-                <div class="block">
-                    <a href="#"><img src="static/kiwi.svg" alt=""></a>
-                    <span> 55</span>
-                </div>
+            {% for i in elements%}
+                    <div class="block">
+                        <a href="{{ i[0] }}"><img src="{{ i[2] }}" alt=""></a>
+                        <span>{{ i[1] }}</span>
+                    </div>
+            {% endfor %}
             </div>
         </div>
     </div>  
