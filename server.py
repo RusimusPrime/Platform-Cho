@@ -150,12 +150,6 @@ def home():
     return render_template('index.html', elements=result)
 
 
-@app.route('/rec')
-@login_required
-def rec():
-    return render_template('recomindation.html')
-
-
 @app.route('/')
 def base():
     return redirect("/home", code=302)
