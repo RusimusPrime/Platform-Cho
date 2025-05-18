@@ -1,6 +1,5 @@
 from flask_login import login_required, logout_user, LoginManager, login_user, UserMixin, current_user
 from flask import Flask, request, render_template_string, render_template, redirect, url_for
-from striprtf.striprtf import rtf_to_text
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from PyPDF2 import PdfReader
