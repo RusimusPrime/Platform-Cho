@@ -10,6 +10,7 @@ from flask_login import login_user
 from flask_login import UserMixin
 from datetime import datetime
 from flask_login import current_user
+import sqlite3
 
 app = Flask(__name__)
 
@@ -32,6 +33,7 @@ class Bible(db.Model):
     path = db.Column(db.String, nullable=False)
     id_user = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
 
 class Users(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -63,7 +65,7 @@ def upload_pdf():
         file.save(save_path)
 
         new_book = Bible(
-            name=file.filename,
+            name=file.filename[:file.filename.index(".pdf")],
             path=save_path,
             id_user=current_user.id,
             date=datetime.utcnow()
@@ -129,7 +131,10 @@ def home():
 @app.route('/rec')
 @login_required
 def rec():
-    return render_template('recomindation.html')
+    con = sqlite3.connect("instance/cho.db")
+    cur = con.cursor()
+    result = list(map(lambda x: [f"/watch/{x[0]}", x[1]], cur.execute("""SELECT id, name FROM bible""").fetchall()))
+    return render_template('recomindation.html', elements=result)
 
 
 @app.route('/')
@@ -173,7 +178,6 @@ def action(name):
     os.makedirs('books', exist_ok=True)
     with open(rtf_path, 'w', encoding='utf-8') as file:
         file.write(rtf_text)
-
 
 
 if __name__ == "__main__":
